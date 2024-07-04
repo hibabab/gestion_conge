@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeAwayTrek</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+  <style>
+    /* Styles CSS */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidenav {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      padding-top: 20px;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidenav a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .sidenav a:hover {
+      color: #007bff;
+    }
+
+    .sidenav .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidenav .logo img {
+      width: 80px;
+    }
+
+    .navbar {
+      background-color: #3b5998;
+      background-image: linear-gradient(to right, #345395 0%, #6b7790 100%);
+      border-bottom: 2px solid #fff;
+      height: 70px;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #f0f0f0;
+      text-decoration: underline;
+    }
+
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+    }
+
+    .titre {
+      margin-left: 70px;
+    }
+
+    .table {
+      margin-left: 150px;
+    }
+
+    .form-container {
+      margin-left: 170px;
+      margin-top: 20px;
+    }
+    table{
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidenav -->
+  <div class="sidenav">
+    <div class="logo">
+      <img src="logo.png" alt="TimeAwayTrek Logo">
+    </div>
+    
+    <a href="notification_employé.html"><i class="fas fa-bell me-2"></i>Notifications <span class="badge bg-primary">3</span></a>
+    <a href="#"><i class="fas fa-envelope me-2"></i>Demandes <span class="badge bg-primary">6</span></a>
+    <a href="deconnecte.html"><i class="fas fa-sign-out-alt me-2"></i>Se déconnecter</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="navbar-brand" href="#">TimeAwayTrek</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">À propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-moon"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenu principal -->
+  <div class="container my-5">
+   
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Date début</th>
+          <th>Date fin</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="demandesTableBody">
+        <!-- Les lignes de demande seront ajoutées ici dynamiquement -->
+      </tbody>
+    </table>
+
+    <!-- Formulaire d'ajout de demande -->
+    <div class="form-container">
+      <button class="btn btn-info custom-button" data-toggle="modal" data-target="#demandeModal">Ajouter une demande</button>
+    </div>
+  </div>
+
+  <!-- Modal pour ajouter/modifier une demande -->
+  <div class="modal fade" id="demandeModal" tabindex="-1" aria-labelledby="demandeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="demandeModalLabel">Ajouter/Modifier une demande</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="demandeForm">
+            <input type="hidden" id="demandeId">
+            <div class="form-group">
+              <label for="type">Type de congé</label>
+              <select class="form-control" id="type">
+                <option value="">Sélectionnez un type de congé</option>
+                <option value="Congé annuel">Congé annuel</option>
+                <option value="Congé maladie">Congé maladie</option>
+                <option value="Congé sans solde">Congé sans solde</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date_debut">Date début</label>
+              <input type="date" class="form-control" id="date_debut">
+            </div>
+            <div class="form-group">
+              <label for="date_fin">Date fin</label>
+              <input type="date" class="form-control" id="date_fin">
+            </div>
+            <div class="form-group">
+              <label for="justification">Justification (Pièce jointe)</label>
+              <input type="file" class="form-control" id="justification">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" id="saveDemandeButton">Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Données simulées des demandes
+    let demandes = [
+      { id: 1, type: 'Congé annuel', date_debut: '2024-07-05', date_fin: '2024-07-07', statut: 'En attente' },
+      { id: 2, type: 'Congé maladie', date_debut: '2024-07-10', date_fin: '2024-07-12', statut: 'Approuvé' },
+      { id: 3, type: 'Congé sans solde', date_debut: '2024-07-15', date_fin: '2024-07-17', statut: 'Refusé' },
+    ];
+
+    // Fonction pour afficher les demandes dans le tableau
+    function afficherDemandes() {
+      let html = '';
+      demandes.forEach((demande, index) => {
+        html += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${demande.type}</td>
+            <td>${demande.date_debut}</td>
+            <td>${demande.date_fin}</td>
+            <td>${demande.statut}</td>
+            <td>
+              ${demande.statut === 'En attente' ?
+                `<button class="btn btn-sm btn-primary" onclick="editerDemande(${demande.id})">Modifier</button>
+                 <button class="btn btn-sm btn-danger" onclick="annulerDemande(${demande.id})">Annuler</button>` :
+                ''}
+            </td>
+          </tr>
+        `;
+      });
+      document.getElementById('demandesTableBody').innerHTML = html;
+    }
+
+    // Fonction pour sauvegarder une nouvelle demande ou modifier une demande existante
+    function sauvegarderDemande() {
+      let id = document.getElementById('demandeId').value;
+      let type = document.getElementById('type').value;
+      let date_debut = document.getElementById('date_debut').value;
+      let date_fin = document.getElementById('date_fin').value;
+      let statut = 'En attente'; // Par défaut, nouvelle demande en attente
+
+      if (id) {
+        // Modification d'une demande existante
+        let index = demandes.findIndex(demande => demande.id == id);
+        if (index !== -1) {
+          demandes[index].type = type;
+          demandes[index].date_debut = date_debut;
+          demandes[index].date_fin = date_fin;
+        }
+      } else {
+        // Ajout d'une nouvelle demande
+        id = demandes.length + 1;
+        demandes.push({ id, type, date_debut, date_fin, statut });
+      }
+
+      // Actualiser l'affichage
+      afficherDemandes();
+
+      // Fermer le modal
+      $('#demandeModal').modal('hide');
+
+      // Réinitialiser le formulaire
+      document.getElementById('demandeForm').reset();
+    }
+
+    // Fonction pour éditer une demande
+    function editerDemande(id) {
+      let demande = demandes.find(demande => demande.id == id);
+      if (demande && demande.statut === 'En attente') {
+        document.getElementById('demandeId').value = demande.id;
+        document.getElementById('type').value = demande.type;
+        document.getElementById('date_debut').value = demande.date_debut;
+        document.getElementById('date_fin').value = demande.date_fin;
+        $('#demandeModal').modal('show');
+      }
+    }
+
+    // Fonction pour annuler une demande
+    function annulerDemande(id) {
+      let demande = demandes.find(demande => demande.id == id);
+      if (demande && demande.statut === 'En attente') {
+        if (confirm('Voulez-vous vraiment annuler cette demande ?')) {
+          demandes = demandes.filter(demande => demande.id != id);
+          afficherDemandes();
+        }
+      }
+    }
+
+    // Initialisation de l'affichage des demandes au chargement de la page
+    document.addEventListener('DOMContentLoaded', function () {
+      afficherDemandes();
+    });
+
+    // Enregistrer une nouvelle demande lors du clic sur le bouton Sauvegarder
+    document.getElementById('saveDemandeButton').addEventListener('click', sauvegarderDemande);
+  </script>
+</body>
+</html>

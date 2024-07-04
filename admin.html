@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeAwayTrek</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Sidenav Styles */
+    .sidenav {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      padding-top: 20px;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .sidenav a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .sidenav a:hover {
+      color: #007bff;
+    }
+
+    .sidenav .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidenav .logo img {
+      width: 80px;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #3b5998;
+      background-image: linear-gradient(to right, #345395 0%, #6b7790 100%);
+      border-bottom: 2px solid #fff;
+      height: 70px;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #f0f0f0;
+      text-decoration: underline;
+    }
+
+    /* Main Content Styles */
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      width: calc(100% - 250px);
+    }
+
+    .form-control {
+      width: 100%;
+      max-width: 300px;
+      margin-top: 20px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table th, .table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .table th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+
+    .table td {
+      background-color: #fff;
+    }
+
+    /* Button Styles */
+    .btn {
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      border-radius: 5px;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidenav -->
+  <div class="sidenav">
+    <div class="logo">
+      <img src="logo.png" alt="TimeAwayTrek Logo">
+    </div>
+   
+    <a href="notification.html"><i class="fas fa-bell me-2"></i>Notifications <span class="badge bg-primary">3</span></a>
+    <a href="admin.html"><i class="fas fa-envelope me-2"></i>Demandes <span class="badge bg-primary">6</span></a>
+    <a href="deconnecte.html"><i class="fas fa-sign-out-alt me-2"></i>Se deconnecter</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="navbar-brand" href="#">TimeAwayTrek</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-moon"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Liste des demandes de congé</h2>
+    <input type="text" class="form-control mb-4" placeholder="Rechercher par nom ou prénom">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>NOM</th>
+            <th>PRÉNOM</th>
+            <th>TYPE DE CONGÉ</th>
+            <th>DATE DE DÉBUT</th>
+            <th>DATE DE FIN</th>
+            <th>STATUT</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody id="request-table-body">
+        <tr>
+            <td>Doe</td>
+            <td>John</td>
+            <td>Congé annuel</td>
+            <td>2024-05-01</td>
+            <td>2024-05-05</td>
+            <td class="status">Accepté</td>
+            <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'Accepté')" disabled>Accepter</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'Refusé')" disabled>Refuser</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Ben Ali</td>
+            <td>Amina</td>
+            <td>Congé maladie</td>
+            <td>2024-06-10</td>
+            <td>2024-06-15</td>
+            <td class="status">Refusé</td>
+            <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'Accepté')" disabled>Accepter</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'Refusé')" disabled>Refuser</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Trabelsi</td>
+            <td>Youssef</td>
+            <td>Congé maternité</td>
+            <td>2024-07-01</td>
+            <td>2024-10-01</td>
+            <td class="status">En attente</td>
+            <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'Accepté')">Accepter</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'Refusé')">Refuser</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Hammami</td>
+            <td>Fares</td>
+            <td>Congé sans solde</td>
+            <td>2024-08-15</td>
+            <td>2024-08-30</td>
+            <td class="status">En attente</td>
+            <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'Accepté')">Accepter</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'Refusé')">Refuser</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Chouikh</td>
+            <td>Salma</td>
+            <td>Congé annuel</td>
+            <td>2024-09-01</td>
+            <td>2024-09-10</td>
+            <td class="status">En attente</td>
+            <td>
+                <button class="btn btn-success btn-sm" onclick="updateStatus(this, 'Accepté')">Accepter</button>
+                <button class="btn btn-danger btn-sm" onclick="updateStatus(this, 'Refusé')">Refuser</button>
+            </td>
+        </tr>
+        <!-- Add other rows here -->
+        </tbody>
+    </table>
+  </div>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+  <script>
+    function updateStatus(button, status) {
+      var row = button.parentElement.parentElement;
+      var statusCell = row.querySelector('.status');
+      statusCell.textContent = status;
+
+      // Disable the buttons after status change
+      var buttons = row.querySelectorAll('button');
+      buttons.forEach(function(btn) {
+        btn.disabled = true;
+      });
+    }
+  </script>
+</body>
+</html>
